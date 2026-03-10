@@ -1,0 +1,166 @@
+package com.example.myapp10test;
+
+
+
+import static android.provider.MediaStore.AUTHORITY;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.core.content.PackageManagerCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 0;
+    private static final int REQUEST_CAMERA = 0;
+    ArrayList<pet> contactos= new ArrayList<pet>();
+    private RecyclerView listaContactos;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        Toolbar toolbar = findViewById(R.id.toolbar); // Find the toolbar by ID
+        setSupportActionBar(toolbar); // Set t
+        listaContactos=findViewById(R.id.rvContactos);
+        LinearLayoutManager llm=new LinearLayoutManager(this);
+llm.setOrientation(LinearLayoutManager.VERTICAL);
+listaContactos.setLayoutManager(llm);
+        //GridLayoutManager glm=new GridLayoutManager(this,2);
+
+        //listaContactos.setLayoutManager(glm);
+        inicializarListaContactos();
+        inicializarAdaptador();
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if( item.getTitle().equals("contacto")){
+
+            Toast.makeText(getApplicationContext(),item.getTitle(), Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(this, contacto.class);
+            startActivity(intent);
+
+        }
+        if( item.getTitle().equals("Acerca de")){
+            Toast.makeText(getApplicationContext(),item.getTitle(), Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(this, acercade.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_contexto,menu);
+        return true;
+    }
+    public void inicializarAdaptador()
+    {
+        petAdaptador adaptador=new petAdaptador(contactos);
+        listaContactos.setAdapter(adaptador);
+    }
+    public void inicializarListaContactos(){
+        //ArrayList<Contacto> contactos= new ArrayList<Contacto>();
+
+        contactos.add(new pet("púas",0,R.drawable.gato1));
+        contactos.add(new pet("peluche",0,R.drawable.perro1));
+        contactos.add(new pet("juanelo",0,R.drawable.gato2));
+        contactos.add(new pet("bigotes",0,R.drawable.perro2));
+        contactos.add(new pet("rasta",0,R.drawable.gato3));
+        /*contactos.add(new pet("picky",0,R.drawable.perro3));
+        contactos.add(new pet("rayitas",0,R.drawable.gato4));
+        contactos.add(new pet("pingu",0,R.drawable.perro4));
+        contactos.add(new pet("greñas",0,R.drawable.gato5));
+        contactos.add(new pet("quesito",0,R.drawable.perro5));
+        contactos.add(new pet("manigüis",0,R.drawable.gato6));
+contactos.add(new pet("canelas",0,R.drawable.perro6));
+contactos.add(new pet("patitas",0,R.drawable.gato7));
+contactos.add(new pet("comelón",0,R.drawable.perro7));
+        contactos.add(new pet("sombra",0,R.drawable.perro8));
+        contactos.add(new pet("bolita",0,R.drawable.gato8));*/
+}
+    public void irasegunda(MenuItem menu)
+    {
+        Intent intent=new Intent(this, activity_5pet.class);
+        startActivity(intent);
+    }
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    public void tomarfoto(View view) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted, so request it
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+                // Show an explanation to the user why the permission is needed
+            } else {
+                // No explanation needed, request the permission directly
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_CAMERA); // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an app-defined int constant
+            }
+        } else {
+            // Permission has already been granted, proceed with the operation
+            //startActivity(new Intent(MediaStore.ACTION_IMAGE_CAPTURE, Uri.parse("tel:5516522458")));
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    Uri.withAppendedPath(Uri.parse("."), "prueba"));
+            //if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            //}
+        }
+    }
+        public void llamar( View view) {
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                // Permission is not granted, so request it
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+                    // Show an explanation to the user why the permission is needed
+                } else {
+                    // No explanation needed, request the permission directly
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.CALL_PHONE},
+                            MY_PERMISSIONS_REQUEST_READ_CONTACTS); // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an app-defined int constant
+                }
+            } else {
+                // Permission has already been granted, proceed with the operation
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:5516522458")));
+            }
+
+
+            // Ensure that there's a camera activity to handle the intent
+
+    }
+
+
+}
