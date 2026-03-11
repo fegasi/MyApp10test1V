@@ -1,4 +1,4 @@
-package com.example.myapp10test;
+package com.example.myapp10test.pojo;
 
 public class pet {
 

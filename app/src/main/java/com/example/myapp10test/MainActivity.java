@@ -2,14 +2,11 @@ package com.example.myapp10test;
 
 
 
-import static android.provider.MediaStore.AUTHORITY;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,16 +18,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.core.content.PackageManagerCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
-import java.io.File;
+import com.example.myapp10test.adapters.petAdaptador;
+import com.example.myapp10test.pojo.pet;
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA = 0;
     ArrayList<pet> contactos= new ArrayList<pet>();
     private RecyclerView listaContactos;
+    private ViewPager2 viewpager2;
+    private TabLayout tabs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         });
         Toolbar toolbar = findViewById(R.id.toolbar); // Find the toolbar by ID
         setSupportActionBar(toolbar); // Set t
+        ViewPager2 viewpager2 = findViewById(R.id.viewpager2); // Find the toolbar by ID
+        TabLayout tabs = findViewById(R.id.tabs); // Find the toolbar by ID
         listaContactos=findViewById(R.id.rvContactos);
         LinearLayoutManager llm=new LinearLayoutManager(this);
 llm.setOrientation(LinearLayoutManager.VERTICAL);

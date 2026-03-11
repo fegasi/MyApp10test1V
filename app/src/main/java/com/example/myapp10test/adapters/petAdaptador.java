@@ -1,4 +1,4 @@
-package com.example.myapp10test;
+package com.example.myapp10test.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapp10test.R;
+import com.example.myapp10test.pojo.pet;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,7 @@ public petAdaptador(ArrayList<pet> contactos)
 pet contacto=contactos.get(position);
 contactoViewHolder.imfoto.setImageResource(contacto.getFoto());
 contactoViewHolder.tvnombre.setText(contacto.getNombre());
-        contactoViewHolder.tvlikes.setText(contacto.getLikes()+"");
+        contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
         //contactoViewHolder.tvemail.setText(contacto.getCorreo());
 contactoViewHolder.tvemail.setOnClickListener(new View.OnClickListener()
 {
@@ -39,11 +42,16 @@ contactoViewHolder.tvemail.setOnClickListener(new View.OnClickListener()
     {
         //holder.getBindingAdapterPosition();
         Toast.makeText(view.getContext(), contacto.getNombre()+contacto.getLikes(), Toast.LENGTH_SHORT).show();
-        int suma=contacto.getLikes();
-        suma++;
-        contacto.setlikes(suma);
+
+            contacto.setlikes(contacto.getLikes() + 1);
+            //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
+            //notifyItemChanged(position);
+            //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
+
         //pet contacto=contactos.get(position);
-        //contactoViewHolder.tvlikes.setText(contacto.getLikes()+"");
+        //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
+
+        notifyItemChanged(position);
         //contactoViewHolder.tvlikes.setText(suma+"");
     }
 });
