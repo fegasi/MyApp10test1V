@@ -21,11 +21,18 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.myapp10test.adapters.PageAdapter;
 import com.example.myapp10test.adapters.petAdaptador;
+import com.example.myapp10test.fragments.PerfilFragment;
+import com.example.myapp10test.fragments.RecyclerViewfragment;
+import com.example.myapp10test.fragments.RecyclerViewpetfragment;
+import com.example.myapp10test.pojo.SendMail;
 import com.example.myapp10test.pojo.pet;
 import com.google.android.material.tabs.TabLayout;
 
@@ -36,33 +43,25 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 0;
     private static final int REQUEST_CAMERA = 0;
-    ArrayList<pet> contactos= new ArrayList<pet>();
-    private RecyclerView listaContactos;
-    private ViewPager2 viewpager2;
+    private ViewPager viewpager;
     private TabLayout tabs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-        });
+        });*/
         Toolbar toolbar = findViewById(R.id.toolbar); // Find the toolbar by ID
         setSupportActionBar(toolbar); // Set t
-        ViewPager2 viewpager2 = findViewById(R.id.viewpager2); // Find the toolbar by ID
-        TabLayout tabs = findViewById(R.id.tabs); // Find the toolbar by ID
-        listaContactos=findViewById(R.id.rvContactos);
-        LinearLayoutManager llm=new LinearLayoutManager(this);
-llm.setOrientation(LinearLayoutManager.VERTICAL);
-listaContactos.setLayoutManager(llm);
-        //GridLayoutManager glm=new GridLayoutManager(this,2);
+        viewpager = findViewById(R.id.viewpager); // Find the toolbar by ID
+        tabs = findViewById(R.id.tabs); // Find the toolbar by ID
+        setUpViewPageAdapter();
 
-        //listaContactos.setLayoutManager(glm);
-        inicializarListaContactos();
-        inicializarAdaptador();
     }
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -87,31 +86,23 @@ listaContactos.setLayoutManager(llm);
         getMenuInflater().inflate(R.menu.menu_contexto,menu);
         return true;
     }
-    public void inicializarAdaptador()
-    {
-        petAdaptador adaptador=new petAdaptador(contactos);
-        listaContactos.setAdapter(adaptador);
-    }
-    public void inicializarListaContactos(){
-        //ArrayList<Contacto> contactos= new ArrayList<Contacto>();
 
-        contactos.add(new pet("púas",0,R.drawable.gato1));
-        contactos.add(new pet("peluche",0,R.drawable.perro1));
-        contactos.add(new pet("juanelo",0,R.drawable.gato2));
-        contactos.add(new pet("bigotes",0,R.drawable.perro2));
-        contactos.add(new pet("rasta",0,R.drawable.gato3));
-        /*contactos.add(new pet("picky",0,R.drawable.perro3));
-        contactos.add(new pet("rayitas",0,R.drawable.gato4));
-        contactos.add(new pet("pingu",0,R.drawable.perro4));
-        contactos.add(new pet("greñas",0,R.drawable.gato5));
-        contactos.add(new pet("quesito",0,R.drawable.perro5));
-        contactos.add(new pet("manigüis",0,R.drawable.gato6));
-contactos.add(new pet("canelas",0,R.drawable.perro6));
-contactos.add(new pet("patitas",0,R.drawable.gato7));
-contactos.add(new pet("comelón",0,R.drawable.perro7));
-        contactos.add(new pet("sombra",0,R.drawable.perro8));
-        contactos.add(new pet("bolita",0,R.drawable.gato8));*/
-}
+    private ArrayList<Fragment> agregarfragments()
+    {
+        ArrayList<Fragment> fragments=new ArrayList<>();
+        fragments.add(new RecyclerViewfragment());
+        fragments.add(new RecyclerViewpetfragment());
+        return fragments;
+    }
+    public void setUpViewPageAdapter(){
+        viewpager.setAdapter(new PageAdapter(getSupportFragmentManager(),agregarfragments()));
+        tabs.setupWithViewPager(viewpager);
+        tabs.getTabAt(0).setIcon(R.drawable.casaperroico);
+        tabs.getTabAt(1).setIcon(R.drawable.caraperroico);
+    }
+// pendiente recicler view contacto grid fotos, correo biografia desarrollador javamail
+
+
     public void irasegunda(MenuItem menu)
     {
         Intent intent=new Intent(this, activity_5pet.class);
@@ -162,6 +153,10 @@ contactos.add(new pet("comelón",0,R.drawable.perro7));
 
             // Ensure that there's a camera activity to handle the intent
 
+    }
+    public void mandarcorreo(){
+        SendMail sm = new SendMail(this, findViewById(R.id.textView), "prueba", findViewById(R.id.textView2));
+        sm.execute();
     }
 
 

@@ -51,7 +51,7 @@ contactoViewHolder.tvemail.setOnClickListener(new View.OnClickListener()
         //pet contacto=contactos.get(position);
         //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
 
-        notifyItemChanged(position);
+        notifyItemChanged(holder.getAdapterPosition());
         //contactoViewHolder.tvlikes.setText(suma+"");
     }
 });

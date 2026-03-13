@@ -5,12 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -18,13 +19,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="@color/white"
-
-
             android:minHeight="?attr/actionBarSize"
+
+
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIcon="@drawable/pawico">
 
             <TextView
@@ -37,46 +39,60 @@
                 tools:layout_editor_absoluteY="22dp" />
 
             <!--   <ImageView
-                   android:id="@+id/ivstar"
-                   android:layout_width="50dp"
-                   android:layout_height="50dp"
+                       android:id="@+id/ivstar"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
 
-                   android:layout_gravity="end"
+                       android:layout_gravity="end"
 
-                   android:layout_weight="10"
-                   app:srcCompat="@drawable/star"
-                   tools:layout_editor_absoluteX="16dp"
-                   tools:layout_editor_absoluteY="7dp" />-->
+                       android:layout_weight="10"
+                       app:srcCompat="@drawable/star"
+                       tools:layout_editor_absoluteX="16dp"
+                       tools:layout_editor_absoluteY="7dp" />-->
         </androidx.appcompat.widget.Toolbar>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            app:tabMode="scrollable">
+            android:minHeight="70dp"
+            app:tabGravity="fill"
+
+
+            app:tabIconTint="@color/white"
+            app:tabIconTintMode="multiply"
+            app:tabIndicatorColor="@color/cardview_dark_background"
+            app:tabIndicatorFullWidth="true"
+            app:tabMaxWidth="0dp"
+            app:tabMinWidth="70dp"
+            app:tabMode="fixed">
 
             <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Tab1" />
+                android:layout_weight="50" />
 
             <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Tab2" />
+                android:layout_height="match_parent"
+                android:layout_weight="50" />
         </com.google.android.material.tabs.TabLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton7"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginEnd="56dp"
+        android:layout_gravity="bottom|right|end"
         android:layout_marginBottom="48dp"
         android:clickable="true"
         android:contentDescription="TODO"
@@ -92,5 +108,6 @@
         app:rippleColor="#7E7979"
         app:srcCompat="@drawable/cameraico"
         app:tint="@null" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

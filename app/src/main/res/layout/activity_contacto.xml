@@ -7,18 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".contacto">
 
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:layout_width="334dp"
-        android:layout_height="329dp"
-        android:layout_marginTop="60dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/camera"
-        app:civ_border_color="#3f51b5"
-        app:civ_border_width="4dp"
-        app:civ_shadow="true"
-        app:civ_shadow_color="#3f51b5"
-        app:civ_shadow_radius="10dp"
+    <EditText
+        android:id="@+id/editTextText2"
+        android:layout_width="338dp"
+        android:layout_height="259dp"
+        android:layout_marginBottom="156dp"
+        android:ems="10"
+        android:gravity="center_horizontal|center_vertical"
+        android:inputType="text"
+        android:hint="comentario"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        tools:layout_editor_absoluteX="29dp" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="333dp"
+        android:layout_height="51dp"
+        android:ems="10"
+        android:gravity="center_horizontal|top"
+        android:inputType="text"
+        android:hint="correo"
+        app:layout_constraintBottom_toTopOf="@+id/editTextText2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.351"
+        tools:layout_editor_absoluteX="29dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="140dp"
+        android:layout_height="94dp"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:text="enviar"
+        android:textColorLink="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:onClick="mandarcorreo"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
