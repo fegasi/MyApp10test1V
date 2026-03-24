@@ -1,4 +1,4 @@
-package com.example.myapp10test.fragments;
+package com.example.myapp10test.vistafragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,33 +9,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapp10test.R;
-import com.example.myapp10test.adapters.petAdaptador;
+import com.example.myapp10test.adapters.petAdaptador2;
 import com.example.myapp10test.pojo.pet;
 
 import java.util.ArrayList;
 
-public class RecyclerViewfragment extends Fragment {
+public class RecyclerViewpetfragment extends Fragment {
     @Nullable
 
-    ArrayList<pet> contactos= new ArrayList<pet>();
-    private RecyclerView listaContactos;
+    ArrayList<pet> contactos2= new ArrayList<pet>();
+    private RecyclerView listaContactos2;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragmentrecyclerview,container,false);
+        View v=inflater.inflate(R.layout.fragment_perfil,container,false);
 
 
-        listaContactos=v.findViewById(R.id.rvContactos);
-        LinearLayoutManager llm=new LinearLayoutManager(getActivity());
-llm.setOrientation(LinearLayoutManager.VERTICAL);
-listaContactos.setLayoutManager(llm);
-       // GridLayoutManager glm=new GridLayoutManager(getActivity(),2);
+        listaContactos2=v.findViewById(R.id.rvpets);
+       // LinearLayoutManager llm=new LinearLayoutManager(getActivity());
+//llm.setOrientation(LinearLayoutManager.VERTICAL);
+//listaContactos.setLayoutManager(llm);
+        GridLayoutManager glm=new GridLayoutManager(getActivity(),3);
 
-      // listaContactos.setLayoutManager(glm);
+       listaContactos2.setLayoutManager(glm);
         inicializarListaContactos();
 
         inicializarAdaptador();
@@ -44,17 +42,17 @@ listaContactos.setLayoutManager(llm);
     }
     public void inicializarAdaptador()
     {
-        petAdaptador adaptador=new petAdaptador(contactos);
-        listaContactos.setAdapter(adaptador);
+        petAdaptador2 adaptador2=new petAdaptador2(contactos2);
+        listaContactos2.setAdapter(adaptador2);
     }
     public void inicializarListaContactos(){
         //ArrayList<Contacto> contactos= new ArrayList<Contacto>();
 
-        contactos.add(new pet("púas",0,R.drawable.gato1));
-        contactos.add(new pet("peluche",0,R.drawable.perro1));
-        contactos.add(new pet("juanelo",0,R.drawable.gato2));
-        contactos.add(new pet("bigotes",0,R.drawable.perro2));
-        contactos.add(new pet("rasta",0,R.drawable.gato3));
+        contactos2.add(new pet(1,"sombra",0,R.drawable.perro8));
+        contactos2.add(new pet(1,"sombra",0,R.drawable.perro8));
+        contactos2.add(new pet(1,"sombra",0,R.drawable.perro8));
+        contactos2.add(new pet(1,"sombra",0,R.drawable.perro8));
+        contactos2.add(new pet(1,"sombra",0,R.drawable.perro8));
         /*contactos.add(new pet("picky",0,R.drawable.perro3));
         contactos.add(new pet("rayitas",0,R.drawable.gato4));
         contactos.add(new pet("pingu",0,R.drawable.perro4));

@@ -1,4 +1,4 @@
-package com.example.myapp10test.fragments;
+package com.example.myapp10test.vistafragments;
 
 import android.os.Bundle;
 

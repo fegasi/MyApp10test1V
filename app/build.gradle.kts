@@ -33,8 +33,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-}
 
+    packaging {
+        resources {
+            excludes += "META-INF/NOTICE.md" // Exclude the specific file
+            excludes += "META-INF/LICENSE.md"
+            // or use pickFirst to include one copy
+            // pickFirsts += "META-INF/NOTICE.md"
+        }
+    }
+}
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -44,4 +52,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.sun.mail:jakarta.mail:2.0.2")
+
+
 }
+

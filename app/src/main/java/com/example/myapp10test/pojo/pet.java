@@ -18,7 +18,11 @@ private int id;
 
         }
 
-        public int getFoto() {
+    public pet() {
+
+    }
+
+    public int getFoto() {
             return foto;
         }
 

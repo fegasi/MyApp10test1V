@@ -3,9 +3,20 @@ package com.example.myapp10test.pojo;
 
 import android.content.Context;
 import android.os.AsyncTask;//-----------SEND MAIL ASYNC Task-------------\\
-import android.se.omapi.Session;
+import android.widget.Toast;
 
+
+import java.net.PasswordAuthentication;
 import java.util.Properties;
+
+
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 
 public class SendMail extends AsyncTask<Void, Void, Void> {
@@ -18,6 +29,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
         private String email;
         private String subject;
         private String message;
+        private String pwd= "secret";
 
         //ProgressDialog to show while sending email
 //        private ProgressDialog progressDialog;
@@ -30,6 +42,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
             this.email = email;
             this.subject = subject;
             this.message = message;
+
         }
 
         @Override
@@ -63,10 +76,11 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
             props.put("mail.smtp.port", "465");
             //Creating a new session
             session = Session.getDefaultInstance(props,
-                    new javax.mail.Authenticator() {
+                    new Authenticator() {
                         //Authenticating the password
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(StaticValues.EMAIL, StaticValues.PASSWORD);
+                        protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+
+                            return new jakarta.mail.PasswordAuthentication(email,pwd);
                         }
                     });
 
@@ -75,7 +89,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
                 MimeMessage mm = new MimeMessage(session);
 
                 //Setting sender address
-                mm.setFrom(new InternetAddress(StaticValues.EMAIL));
+                mm.setFrom(new InternetAddress(email));
                 //Adding receiver
                 mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
                 //Adding subject
@@ -97,4 +111,4 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
     //------------------Send Mail using JavaX Mail API----------------------\\
 
 //------------------------
-}
+

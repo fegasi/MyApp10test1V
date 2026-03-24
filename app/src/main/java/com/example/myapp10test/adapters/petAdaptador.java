@@ -31,7 +31,7 @@ public petAdaptador(ArrayList<pet> contactos)
     @Override
 
     public void onBindViewHolder(@NonNull contactoViewHolder holder, int position) {
-pet contacto=contactos.get(position);
+final pet contacto=contactos.get(position);
 contactoViewHolder.imfoto.setImageResource(contacto.getFoto());
 contactoViewHolder.tvnombre.setText(contacto.getNombre());
         contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
@@ -49,9 +49,9 @@ contactoViewHolder.tvemail.setOnClickListener(new View.OnClickListener()
             //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
 
         //pet contacto=contactos.get(position);
-        //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
+        contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
 
-        notifyItemChanged(holder.getAdapterPosition());
+        //notifyItemChanged(holder.getAdapterPosition());
         //contactoViewHolder.tvlikes.setText(suma+"");
     }
 });

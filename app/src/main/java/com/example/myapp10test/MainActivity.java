@@ -18,22 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.myapp10test.adapters.PageAdapter;
-import com.example.myapp10test.adapters.petAdaptador;
-import com.example.myapp10test.fragments.PerfilFragment;
-import com.example.myapp10test.fragments.RecyclerViewfragment;
-import com.example.myapp10test.fragments.RecyclerViewpetfragment;
+import com.example.myapp10test.vistafragments.RecyclerViewfragment;
+import com.example.myapp10test.vistafragments.RecyclerViewpetfragment;
 import com.example.myapp10test.pojo.SendMail;
-import com.example.myapp10test.pojo.pet;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -155,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void mandarcorreo(){
-        SendMail sm = new SendMail(this, findViewById(R.id.textView), "prueba", findViewById(R.id.textView2));
+        SendMail sm = new SendMail(this, String.valueOf(findViewById(R.id.textView)), "mensaje android", String.valueOf(findViewById(R.id.textView2)));
         sm.execute();
     }
 
