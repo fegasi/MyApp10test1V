@@ -4,12 +4,14 @@ public class pet {
 
 
 
-
+private int id;
         private String nombre;
         private int likes;
         private int foto;
-        public pet(String name,int gustas, int photo)
+        public pet(int id,String name,int gustas, int photo)
         {
+
+            this.id=id;
             nombre=name;
             likes=gustas;
             foto=photo;
@@ -41,6 +43,14 @@ public class pet {
         public void setNombre(String nombre) {
             this.nombre = nombre;
         }
+
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+}
 
 
