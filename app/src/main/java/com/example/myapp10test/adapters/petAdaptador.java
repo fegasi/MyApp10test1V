@@ -1,5 +1,6 @@
 package com.example.myapp10test.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapp10test.R;
+import com.example.myapp10test.db.ConstructorContactos;
 import com.example.myapp10test.pojo.pet;
 
 import java.util.ArrayList;
@@ -18,9 +20,12 @@ import java.util.ArrayList;
 public class petAdaptador extends RecyclerView.Adapter<petAdaptador.contactoViewHolder> {
 
     ArrayList<pet> contactos;
-public petAdaptador(ArrayList<pet> contactos)
+    Activity activity;
+public petAdaptador(ArrayList<pet> contactos,Activity activity)
     {
         this.contactos=contactos;
+
+        this.activity = activity;
     }
 
     public contactoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,11 +52,15 @@ contactoViewHolder.tvemail.setOnClickListener(new View.OnClickListener()
             //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
             //notifyItemChanged(position);
             //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
+        ConstructorContactos constructorContactos = new ConstructorContactos(activity);
 
+        constructorContactos.darLikeContacto(contacto);
+        contactoViewHolder.tvlikes.setText(String.valueOf(constructorContactos.obtenerLikesContacto(contacto)));
         //pet contacto=contactos.get(position);
-        contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
+        //contactoViewHolder.tvlikes.setText(String.valueOf(contacto.getLikes()));
 
         //notifyItemChanged(holder.getAdapterPosition());
+        notifyItemChanged(holder.getBindingAdapterPosition());
         //contactoViewHolder.tvlikes.setText(suma+"");
     }
 });

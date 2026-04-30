@@ -53,6 +53,8 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.sun.mail:jakarta.mail:2.0.2")
+    implementation("com.squareup.retrofit2:retrofit:3.1.0-SNAPSHOT")
+
 
 
 }

@@ -57,7 +57,7 @@ public class RecyclerViewfragment extends Fragment implements IRecyclerViewFragm
 
     @Override
     public petAdaptador crearAdaptador(ArrayList<pet> contactos) {
-        petAdaptador adaptador=new petAdaptador(contactos);
+        petAdaptador adaptador=new petAdaptador(contactos,getActivity());
         return adaptador;
     }
 
